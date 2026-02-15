@@ -1,0 +1,419 @@
+/*
+ * Flipper Styles
+ * @author Prakhar Aggarwal
+ */
+:root {
+    --bg-color: #0f172a;
+    --bg-gradient: #1e293b;
+    --card-bg: #1e293b;
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --accent-gold: #fbbf24;
+    --button-hover: #334155;
+    --button-bg: #3b4a63;
+    --shadow: rgba(0, 0, 0, 0.5);
+    --transition: cubic-bezier(0.15, 1, 0.3, 1);
+}
+
+[data-theme="light"] {
+    --bg-color: #e0f2f1;
+    --bg-gradient: #b2dfdb;
+    --card-bg: #ffffff;
+    --text-primary: #1e293b;
+    --text-secondary: #475569;
+    --button-hover: #e2e8f0;
+    --button-bg: #94a3b8;
+    --shadow: rgba(0, 0, 0, 0.15);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, var(--bg-color), var(--bg-gradient));
+    color: var(--text-primary);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    overflow: hidden;
+    user-select: none;
+}
+
+.container {
+    width: 100%;
+    max-width: 420px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.header {
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--text-secondary);
+    font-weight: 700;
+}
+
+.theme-toggle {
+    position: fixed;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: var(--card-bg);
+    border: 1px solid rgba(128, 128, 128, 0.2);
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 12px var(--shadow);
+    transition: transform 0.2s;
+}
+
+.theme-toggle:hover {
+    transform: scale(1.05);
+}
+
+.theme-icon {
+    width: 24px;
+    height: 24px;
+    color: var(--accent-gold);
+}
+
+body,
+.container,
+.stats,
+.flip-btn,
+.reset-btn,
+.theme-toggle,
+.stat-value,
+.result-text {
+    transition: all 0.6s var(--transition);
+}
+
+.coin-scene {
+    width: 220px;
+    height: 220px;
+    perspective: 1200px;
+    position: relative;
+    margin: 1.5rem 0;
+}
+
+.coin {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    will-change: transform;
+}
+
+.coin-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    backface-visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 8px solid #989898;
+    background: radial-gradient(circle at 30% 30%, #fff, #909090);
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.4), 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.coin-face::before {
+    content: '';
+    position: absolute;
+    width: 90%;
+    height: 90%;
+    border-radius: 50%;
+    border: 3px solid rgba(120, 120, 120, 0.6);
+}
+
+.face-front {
+    transform: rotateX(0deg) translateZ(2px);
+}
+
+.face-back {
+    transform: rotateX(180deg) translateZ(2px);
+}
+
+.symbol {
+    font-size: 4rem;
+    color: #2d3748;
+    text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+.coin-shadow {
+    position: absolute;
+    bottom: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 140px;
+    height: 20px;
+    background: radial-gradient(ellipse, rgba(0, 0, 0, 0.6), transparent);
+    filter: blur(12px);
+    opacity: 0.7;
+    transition: all 0.3s ease;
+}
+
+.controls {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.flip-btn {
+    background: linear-gradient(135deg, var(--button-bg), #1e293b);
+    color: var(--text-primary);
+    border: 1px solid rgba(128, 128, 128, 0.2);
+    padding: 1.2rem;
+    width: 100%;
+    border-radius: 16px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 6px 20px var(--shadow);
+    transition: transform 0.2s;
+}
+
+.flip-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+}
+
+.flip-btn:active:not(:disabled) {
+    transform: translateY(1px);
+}
+
+.flip-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    width: 100%;
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 16px;
+    border: 1px solid rgba(128, 128, 128, 0.15);
+    box-shadow: 0 4px 15px var(--shadow);
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stat-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+.stat-value {
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+.stat-value.updated {
+    animation: pulse 0.4s ease;
+}
+
+@keyframes pulse {
+    50% {
+        transform: scale(1.2);
+        color: var(--accent-gold);
+    }
+}
+
+.result-text {
+    height: 2.5rem;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--accent-gold);
+    opacity: 0;
+    transform: translateY(15px);
+}
+
+.result-text.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reset-btn {
+    background: transparent;
+    color: var(--text-secondary);
+    border: 1px solid rgba(128, 128, 128, 0.2);
+    padding: 0.75rem 1.5rem;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    margin-top: 0.5rem;
+}
+
+.reset-btn:hover {
+    color: #ef4444;
+    border-color: rgba(239, 68, 68, 0.3);
+}
+
+.confirm-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+}
+
+.confirm-overlay.show {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.confirm-dialog {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 2rem;
+    width: 90%;
+    max-width: 360px;
+    transform: scale(0.9) translateY(20px);
+    transition: transform 0.3s var(--transition);
+    border: 1px solid rgba(128, 128, 128, 0.2);
+}
+
+.confirm-overlay.show .confirm-dialog {
+    transform: scale(1) translateY(0);
+}
+
+.confirm-actions {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+}
+
+.confirm-btn {
+    flex: 1;
+    padding: 0.8rem;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+}
+
+.confirm-btn-cancel {
+    background: transparent;
+    color: var(--text-secondary);
+    border: 1px solid rgba(128, 128, 128, 0.2);
+}
+
+.confirm-btn-confirm {
+    background: #ef4444;
+    color: white;
+}
+
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: rotate(0);
+    }
+
+    25% {
+        transform: rotate(-10deg);
+    }
+
+    75% {
+        transform: rotate(10deg);
+    }
+}
+
+.confirm-icon.shake {
+    animation: shake 0.5s ease;
+}
+
+.coin-flipping {
+    transition: transform 3s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+}
+
+.shadow-animate {
+    animation: shadowBreathe 3s ease-in-out;
+}
+
+@keyframes shadowBreathe {
+
+    0%,
+    100% {
+        transform: translateX(-50%) scale(1);
+        opacity: 0.7;
+    }
+
+    50% {
+        transform: translateX(-50%) scale(0.4);
+        opacity: 0.3;
+        filter: blur(16px);
+    }
+}
+
+.coin-settling {
+    animation: coinSettle 0.3s ease-out;
+}
+
+@keyframes coinSettle {
+    0% {
+        transform: rotateX(var(--final-rotation));
+    }
+
+    25% {
+        transform: rotateX(var(--final-rotation)) rotateY(3deg);
+    }
+
+    75% {
+        transform: rotateX(var(--final-rotation)) rotateY(-2deg);
+    }
+
+    100% {
+        transform: rotateX(var(--final-rotation));
+    }
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+@media (max-width: 480px) {
+    .coin-scene {
+        width: 180px;
+        height: 180px;
+    }
+
+    .symbol {
+        font-size: 3rem;
+    }
+}

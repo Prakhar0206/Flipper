@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A premium 3D coin flip simulator with realistic physics and sound.">
+    <meta name="author" content="Prakhar Aggarwal">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🪙</text></svg>">
+    <title>Flipper | Premium Coin Flip</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <svg class="theme-icon" id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+    </button>
+
+    <div id="ariaLive" class="sr-only" role="status" aria-live="polite"></div>
+
+    <div class="container">
+        <h1 class="header" role="banner">Flipper</h1>
+
+        <div class="coin-scene" role="img" aria-label="Animated coin">
+            <div class="coin" id="coin">
+                <div class="coin-face face-front" aria-hidden="true">
+                    <svg class="symbol" width="80" height="80" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                    </svg>
+                </div>
+                <div class="coin-face face-back" aria-hidden="true">
+                    <span class="symbol">1</span>
+                </div>
+            </div>
+            <div class="coin-shadow" id="shadow" aria-hidden="true"></div>
+        </div>
+
+        <div class="result-text" id="resultLabel" role="status" aria-live="polite"></div>
+
+        <div class="controls">
+            <button class="flip-btn" id="flipBtn" aria-label="Flip coin">
+                FLIP COIN
+            </button>
+
+            <div class="stats" role="region" aria-label="Flip statistics">
+                <div class="stat-item">
+                    <span class="stat-label">Heads</span>
+                    <span class="stat-value" id="headsCount">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Tails</span>
+                    <span class="stat-value" id="tailsCount">0</span>
+                </div>
+            </div>
+
+            <button class="reset-btn" id="resetBtn" aria-label="Reset statistics">
+                Reset Stats
+            </button>
+        </div>
+    </div>
+
+    <div class="confirm-overlay" id="confirmOverlay" role="dialog" aria-modal="true">
+        <div class="confirm-dialog">
+            <div class="confirm-icon" id="confirmIcon">⚠️</div>
+            <h2 class="confirm-title" id="confirmTitle">Reset Statistics?</h2>
+            <p class="confirm-message">This will delete your flip history.</p>
+
+            <div class="confirm-actions">
+                <button class="confirm-btn confirm-btn-cancel" id="confirmCancel">Cancel</button>
+                <button class="confirm-btn confirm-btn-confirm" id="confirmReset">Reset</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
