@@ -12,7 +12,10 @@
     --button-hover: #334155;
     --button-bg: #3b4a63;
     --shadow: rgba(0, 0, 0, 0.5);
+    /* Standardized timing variables */
     --transition: cubic-bezier(0.15, 1, 0.3, 1);
+    --animation-duration: 3s;
+    --transition-duration: 0.4s;
 }
 
 [data-theme="light"] {
@@ -76,17 +79,31 @@ body {
     justify-content: center;
     cursor: pointer;
     box-shadow: 0 4px 12px var(--shadow);
-    transition: transform 0.2s;
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    z-index: 100;
 }
 
+/* (23) Better hover effect */
 .theme-toggle:hover {
-    transform: scale(1.05);
+    transform: translateY(-2px) scale(1.1);
+    box-shadow: 0 6px 12px var(--shadow);
+}
+
+/* (38) Visible focus ring */
+.theme-toggle:focus-visible,
+.flip-btn:focus-visible,
+.reset-btn:focus-visible,
+.confirm-btn:focus-visible {
+    outline: 2px solid var(--accent-gold);
+    outline-offset: 2px;
 }
 
 .theme-icon {
     width: 24px;
     height: 24px;
     color: var(--accent-gold);
+    /* (29) Smooth transition */
+    transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 body,
@@ -196,9 +213,11 @@ body,
     transform: translateY(1px);
 }
 
+/* (27) Proper disabled state */
 .flip-btn:disabled {
     opacity: 0.6;
     cursor: not-allowed;
+    transform: none;
 }
 
 .stats {
@@ -248,7 +267,9 @@ body,
     font-weight: 700;
     color: var(--accent-gold);
     opacity: 0;
+    /* (46) Use CSS variable */
     transform: translateY(15px);
+    transition: all var(--transition-duration) var(--transition);
 }
 
 .result-text.show {
@@ -265,11 +286,29 @@ body,
     font-size: 0.85rem;
     cursor: pointer;
     margin-top: 0.5rem;
+    /* (22) Restored button quality */
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
+/* (21) Restored icon */
+.reset-btn::after {
+    content: '↻';
+    font-size: 1.1em;
+    transition: transform 0.4s ease;
+}
+
+/* (22) Better hover */
 .reset-btn:hover {
     color: #ef4444;
     border-color: rgba(239, 68, 68, 0.3);
+    background: rgba(239, 68, 68, 0.05);
+}
+
+.reset-btn:hover::after {
+    transform: rotate(180deg);
 }
 
 .confirm-overlay {
@@ -283,6 +322,7 @@ body,
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s;
+    z-index: 1000;
 }
 
 .confirm-overlay.show {
@@ -305,10 +345,46 @@ body,
     transform: scale(1) translateY(0);
 }
 
+.confirm-stats {
+    background: rgba(128, 128, 128, 0.05);
+    padding: 1rem;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: space-around;
+}
+
+.confirm-stat-item {
+    text-align: center;
+}
+
+.confirm-stat-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    margin-bottom: 0.25rem;
+    letter-spacing: 1px;
+}
+
+.confirm-stat-change {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.confirm-stat-change .old {
+    text-decoration: line-through;
+    opacity: 0.5;
+}
+
+.confirm-stat-change .arrow {
+    color: #ef4444;
+    margin: 0 0.5rem;
+}
+
 .confirm-actions {
     display: flex;
     gap: 0.75rem;
-    margin-top: 1.5rem;
 }
 
 .confirm-btn {
@@ -352,11 +428,13 @@ body,
 }
 
 .coin-flipping {
-    transition: transform 3s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+    /* (45) Use CSS variable */
+    transition: transform var(--animation-duration) cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
 }
 
 .shadow-animate {
-    animation: shadowBreathe 3s ease-in-out;
+    /* (45) Use CSS variable */
+    animation: shadowBreathe var(--animation-duration) ease-in-out;
 }
 
 @keyframes shadowBreathe {
@@ -407,6 +485,45 @@ body,
     border: 0;
 }
 
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    .coin-flipping {
+        transition: transform 0.5s ease !important;
+    }
+
+    .coin-settling {
+        animation: none !important;
+    }
+
+    .shadow-animate {
+        animation: none !important;
+    }
+
+    .stat-value.updated {
+        animation: none !important;
+    }
+
+    .confirm-icon.shake {
+        animation: none !important;
+    }
+
+    .reset-btn::after {
+        transition: none !important;
+    }
+
+    body,
+    .container,
+    .stats,
+    .flip-btn,
+    .reset-btn,
+    .theme-toggle,
+    .stat-value,
+    .result-text,
+    .theme-icon {
+        transition-duration: 0.1s !important;
+    }
+}
+
 @media (max-width: 480px) {
     .coin-scene {
         width: 180px;
@@ -415,5 +532,11 @@ body,
 
     .symbol {
         font-size: 3rem;
+    }
+
+    /* (43) Bigger touch target */
+    .theme-toggle {
+        width: 52px;
+        height: 52px;
     }
 }

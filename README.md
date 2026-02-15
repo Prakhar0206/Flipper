@@ -1,61 +1,84 @@
-# Flipper - Premium Coin Flip Simulator
+# 🪙 Flipper
 
-![Project Status](https://img.shields.io/badge/status-active-success.svg)
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
+**A premium 3D coin flip simulator with a secret.**
 
-Flipper is a visually stunning, premium 3D coin flip simulator designed for the modern web. Built with vanilla HTML, CSS, and JavaScript, it offers a seamless and responsive experience with rigorous focus on aesthetics and accessibility.
+[![Live Demo](https://img.shields.io/badge/demo-live-success)](https://flipper-coin.vercel.app/)
+[![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
-## 🌟 Features
+---
 
-*   **3D Physics Animation:** Realistic coin rotation and settling physics using CSS 3D transforms.
-*   **Premium Aesthetics:** Glassmorphism, metallic gradients, and smooth shadows.
-*   **Theme Support:** Toggle between Sleek Dark Mode (default) and Clean Light Mode.
-*   **Built-in Sound:** Procedural audio generation using the Web Audio API (no external assets required).
-*   **Statistics Tracking:** Persists your flip history (Heads/Tails count) locally.
-*   **Accessibility:** WAI-ARIA compliant, screen reader support, and keyboard navigation.
-*   **Secret Controls:** Hidden mechanics to influence the outcome (see below).
+## ✨ Features
+
+- **Realistic 3D Physics** - Smooth coin rotation with metallic silver finish
+- **Dark/Light Themes** - Seamless theme switching with elegant transitions
+- **Persistent Stats** - Your flip history is automatically saved
+- **Full Accessibility** - Keyboard navigation and screen reader support
+- **Zero Dependencies** - Pure vanilla JavaScript, no build required
+
+---
 
 ## 🎮 Controls
 
-*   **Click/Tap:** Tap the "FLIP COIN" button to flip.
-*   **Reset:** Click "Reset Stats" to clear your history (with confirmation).
-*   **Theme:** Click the sun/moon icon in the top right.
+**Basic:**
+- Click/Tap `FLIP COIN` to flip
+- Press `Space` or `Enter` to flip
+- Click sun/moon icon to change theme
 
-### 🤫 Secret "Magic" Controls
-Want to impress your friends? Use these hidden triggers to determine the result:
+**Secret Controls:**
+```
+┌────────────────────────────────┐
+│  LEFT    │   CENTER   │  RIGHT  │
+│  = HEADS │  = RANDOM  │  = TAILS │
+└────────────────────────────────┘
+```
 
-**Mouse/Touch:**
-*   **Force Heads:** Click the **Left 25%** of the "FLIP COIN" button.
-*   **Force Tails:** Click the **Right 25%** of the "FLIP COIN" button.
-*   **Random:** Click the **Center 50%** of the button.
+- **Click left 25%** of button → Always Heads
+- **Click right 25%** of button → Always Tails
+- **Click center 50%** → Fair random
+- **Arrow keys** → Left = Heads, Right = Tails
 
-**Keyboard:**
-*   **Force Heads:** Press `ArrowLeft`
-*   **Force Tails:** Press `ArrowRight`
-*   **Random:** Press `Space` or `Enter`
+---
 
-## 🛠️ Installation
-
-Simply clone the repository and open `index.html` in your browser. No build process or dependencies required!
+## 🚀 Quick Start
 
 ```bash
 git clone https://github.com/Prakhar0206/Flipper.git
 cd Flipper
-# Open index.html
+# Open index.html in your browser
 ```
 
-## 🏗️ Technical Details
+No installation needed. Just open `index.html` and start flipping!
 
-*   **Zero Dependencies:** Pure Vanilla JS.
-*   **Performance:** Optimized for 60fps animations.
-*   **Storage:** Uses `localStorage` to save your stats and theme preference.
-*   **Audio:** Synthesized in real-time, reducing network requests.
+---
+
+## 🛠️ Tech Stack
+
+- **HTML5** - Semantic markup
+- **CSS3** - 3D transforms, animations, custom properties
+- **Vanilla JS** - Modern ES6+ features
+- **Web Audio API** - Procedural sound generation
+
+**Size:** ~30KB total | **Performance:** 60 FPS animations
+
+---
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+MIT License - feel free to use this project however you'd like.
+
+---
 
 ## 👤 Author
 
-**Prakhar Aggarwal**
-- GitHub: [@Prakhar0206](https://github.com/Prakhar0206)
+**Prakhar Aggarwal**  
+GitHub: [@Prakhar0206](https://github.com/Prakhar0206)
+
+---
+
+<div align="center">
+
+**Made with ❤️ using vanilla JavaScript**
+
+[⭐ Star this repo](https://github.com/Prakhar0206/Flipper) if you found it interesting!
+
+</div>

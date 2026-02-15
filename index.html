@@ -65,11 +65,31 @@
         </div>
     </div>
 
-    <div class="confirm-overlay" id="confirmOverlay" role="dialog" aria-modal="true">
+    <div class="confirm-overlay" id="confirmOverlay" role="dialog" aria-modal="true" aria-labelledby="confirmTitle"
+        aria-describedby="confirmMessage">
         <div class="confirm-dialog">
             <div class="confirm-icon" id="confirmIcon">⚠️</div>
             <h2 class="confirm-title" id="confirmTitle">Reset Statistics?</h2>
-            <p class="confirm-message">This will delete your flip history.</p>
+            <p class="confirm-message" id="confirmMessage">This will delete your flip history.</p>
+
+            <div class="confirm-stats">
+                <div class="confirm-stat-item">
+                    <div class="confirm-stat-label">Heads</div>
+                    <div class="confirm-stat-change">
+                        <span class="old" id="confirmHeads">0</span>
+                        <span class="arrow">→</span>
+                        <span>0</span>
+                    </div>
+                </div>
+                <div class="confirm-stat-item">
+                    <div class="confirm-stat-label">Tails</div>
+                    <div class="confirm-stat-change">
+                        <span class="old" id="confirmTails">0</span>
+                        <span class="arrow">→</span>
+                        <span>0</span>
+                    </div>
+                </div>
+            </div>
 
             <div class="confirm-actions">
                 <button class="confirm-btn confirm-btn-cancel" id="confirmCancel">Cancel</button>
